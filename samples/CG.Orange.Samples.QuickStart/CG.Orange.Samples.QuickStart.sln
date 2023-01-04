@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33209.295
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CG.Orange.Samples.QuickStart", "CG.Orange.Samples.QuickStart.csproj", "{999E089A-49D6-4464-9FE7-936359732A00}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CG.Orange.Clients", "..\..\src\CG.Orange.Clients\CG.Orange.Clients.csproj", "{89290289-0E06-449E-8323-7AE42351015A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{999E089A-49D6-4464-9FE7-936359732A00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{999E089A-49D6-4464-9FE7-936359732A00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{999E089A-49D6-4464-9FE7-936359732A00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{999E089A-49D6-4464-9FE7-936359732A00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89290289-0E06-449E-8323-7AE42351015A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89290289-0E06-449E-8323-7AE42351015A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89290289-0E06-449E-8323-7AE42351015A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89290289-0E06-449E-8323-7AE42351015A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5EE88908-F788-4806-A765-84970714E63C}
+	EndGlobalSection
+EndGlobal
