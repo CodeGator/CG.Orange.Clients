@@ -108,7 +108,7 @@ namespace CG.Orange.Clients.Providers
                         // Log what we are about to do.
                         Source.Options.Logger?.LogDebug(
                             "Adding {count} settings to the collection.",
-                            data.Length
+                            data.Count
                             );
 
                         // Loop through the values.
@@ -367,11 +367,49 @@ namespace CG.Orange.Clients.Providers
                     );
 
                 // Sanity check the results.
-                if (parsed is null ||
-                    parsed.token_type != "Bearer" ||
-                    parsed.expires_in == 0 ||
-                    !parsed.scope.Contains("cfg-svc-read"))
+                if (parsed is null)
                 {
+                    // Log what we are about to do.
+                    Source.Options.Logger?.LogDebug(
+                        "Unable to parse the auth token."
+                        );
+
+                    // No token for you!
+                    return "";
+                }
+
+                // Sanity check the results.
+                if (parsed.token_type != "Bearer")
+                {
+                    // Log what we are about to do.
+                    Source.Options.Logger?.LogDebug(
+                        "Auth token was not a bearer token."
+                        );
+
+                    // No token for you!
+                    return "";
+                }
+
+                // Sanity check the results.
+                if (parsed.expires_in == 0)
+                {
+                    // Log what we are about to do.
+                    Source.Options.Logger?.LogDebug(
+                        "Auth token is expired."
+                        );
+
+                    // No token for you!
+                    return "";
+                }
+
+                // Sanity check the results.
+                if (!parsed.scope.Contains("orange.read"))
+                {
+                    // Log what we are about to do.
+                    Source.Options.Logger?.LogDebug(
+                        "Required scope not found in auth token."
+                        );
+
                     // No token for you!
                     return "";
                 }
@@ -405,7 +443,8 @@ namespace CG.Orange.Clients.Providers
         /// This method fetches settings from the remote configuration microservice.
         /// </summary>
         /// <param name="accessToken">The access token to use for the operation.</param>
-        private KeyValuePair<string, string?>[] FetchSettings(
+        /// <returns>The setting from the remove microservice.</returns>
+        private Dictionary<string, string?> FetchSettings(
             string accessToken
             )
         {
@@ -430,7 +469,7 @@ namespace CG.Orange.Clients.Providers
                         );
 
                     // No data.
-                    return Array.Empty<KeyValuePair<string, string?>>();
+                    return new Dictionary<string, string?>();
                 }
 
                 // Log what we are about to do.
@@ -552,19 +591,34 @@ namespace CG.Orange.Clients.Providers
                         );
                 }
 
+                // Log what we are about to do.
+                Source.Options.Logger?.LogDebug(
+                    "Reading JSON from microservice."
+                    );
+
                 // Read the remote settings.
-                var settings = response.Content.ReadFromJsonAsync<
-                    KeyValuePair<string, string?>[]
-                    >().Result;
+                using var stream = response.Content.ReadAsStreamAsync().Result;
+                var cfg = new ConfigurationBuilder()
+                    .AddJsonStream(stream).Build();
 
                 // Log what we are about to do.
                 Source.Options.Logger?.LogDebug(
-                    "Returning {count} settings.",
-                    settings?.Length
+                    "Converting to key-value-pairs."
+                    );
+
+                // Convert to a dictionary.
+                var kvps = cfg.AsEnumerable().ToDictionary(
+                    x => x.Key, x => x.Value
+                    );
+
+                // Log what we are about to do.
+                Source.Options.Logger?.LogDebug(
+                    "Returning {count} key-value-pairs.",
+                    kvps.Count
                     );
 
                 // Return the results.
-                return settings ?? Array.Empty<KeyValuePair<string, string?>>();
+                return kvps;
             }
             finally
             {

@@ -1,31 +1,50 @@
-using CG.Orange.Samples.QuickStart.Data;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
+﻿
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
-var builder = WebApplication.CreateBuilder(args);
+BootstrapLogger.LogLevelToDebug();
 
-// Add services to the container.
-builder.Services.AddRazorPages();
-builder.Services.AddServerSideBlazor();
-builder.Services.AddSingleton<WeatherForecastService>();
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+while(true)
 {
-    app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+    var builder = new HostBuilder().ConfigureAppConfiguration(x =>
+        x.AddOrangeConfiguration(options =>
+        {
+            options.Application = "test1";
+            options.Environment = "development";
+            options.Url = "https://localhost:7145";
+            options.ClientId = "cg.orange.samples.quickstart";
+        },
+        BootstrapLogger.Instance()
+        ));
+
+    builder.Build().RunDelegate((host, token) =>
+    {
+        Console.WriteLine();
+
+        var cfg = host.Services.GetRequiredService<IConfiguration>();
+        if (cfg.GetChildren().Any())
+        {
+            foreach (var kvp in cfg.GetChildren())
+            {
+                Console.WriteLine($"key: {kvp.Key}, value: {kvp.Value}");
+            }
+        }
+        else
+        {
+            Console.WriteLine("no configuration found! check the settings / make sure the server is running.");
+        }
+    });
+
+    Console.WriteLine();
+    Console.WriteLine("press Q to stop, or any other to continue");
+    
+    var key = Console.ReadKey();
+    if (key.Key == ConsoleKey.Q)
+    {
+        Console.WriteLine("done.");
+        return;
+    }
+    Console.WriteLine();
 }
-
-app.UseHttpsRedirection();
-
-app.UseStaticFiles();
-
-app.UseRouting();
-
-app.MapBlazorHub();
-app.MapFallbackToPage("/_Host");
-
-app.Run();

@@ -73,7 +73,11 @@ namespace Microsoft.Extensions.Configuration
                 );
 
             // Create default options.
-            var options = new ConfigurationOptions();
+            var options = new ConfigurationOptions()
+            {
+                // By default use the bootstrap logger.
+                Logger = bootstrapLogger
+            };
 
             // Give the caller the chance to modify the options.
             optionsDelegate(options);
