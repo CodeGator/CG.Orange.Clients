@@ -1,0 +1,10 @@
+### YamlMime:TableOfContent
+- uid: CG.Validations
+  name: CG.Validations
+  items:
+  - uid: CG.Validations.Guard
+    name: Guard
+  - uid: CG.Validations.GuardExtensions
+    name: GuardExtensions
+  - uid: CG.Validations.IGuard
+    name: IGuard
