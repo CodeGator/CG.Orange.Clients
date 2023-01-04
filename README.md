@@ -1,9 +1,9 @@
 # CG.Orange.Clients: 
 
-[![Build Status](https://dev.azure.com/codegator/CG.Orange.Clients/_apis/build/status/CodeGator.CG.Orange.Clients?branchName=main)](https://dev.azure.com/codegator/CG.Orange.Clients/_build/latest?definitionId=99&branchName=main)
+[![Build Status](https://dev.azure.com/codegator/CG.Orange.Clients/_apis/build/status/CodeGator.CG.Orange.Clients?branchName=main)](https://dev.azure.com/codegator/CG.Orange.Clients/_build/latest?definitionId=103&branchName=main)
 [![Github docs](https://img.shields.io/static/v1?label=Documentation&message=online&color=blue)](https://codegator.github.io/CG.Orange.Clients/)
 [![NuGet downloads](https://img.shields.io/nuget/dt/CG.Orange.Clients.svg?style=flat)](https://nuget.org/packages/CG.Orange.Clients)
-![Azure DevOps coverage](https://img.shields.io/azure-devops/coverage/codegator/CG.Orange.Clients/99)
+![Azure DevOps coverage](https://img.shields.io/azure-devops/coverage/codegator/CG.Orange.Clients/103)
 [![Github discussion](https://img.shields.io/badge/Discussion-online-blue)](https://github.com/CodeGator/CG.Orange.Clients/discussions)
 [![CG.Orange.Clients on fuget.org](https://www.fuget.org/packages/CG.Orange.Clients/badge.svg)](https://www.fuget.org/packages/CG.Orange.Clients)
 
