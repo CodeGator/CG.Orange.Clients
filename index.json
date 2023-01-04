@@ -1,0 +1,47 @@
+{
+  "api/CG.Orange.Clients.Options.ConfigurationOptions.html": {
+    "href": "api/CG.Orange.Clients.Options.ConfigurationOptions.html",
+    "title": "Class ConfigurationOptions",
+    "keywords": "Class ConfigurationOptions This class represent options for reading from the ORANGE configuration microservice. Inheritance System.Object ConfigurationOptions Inherited Members System.Object.Equals(System.Object) System.Object.Equals(System.Object, System.Object) System.Object.GetHashCode() System.Object.GetType() System.Object.MemberwiseClone() System.Object.ReferenceEquals(System.Object, System.Object) System.Object.ToString() Namespace : CG.Orange.Clients.Options Assembly : CG.Orange.Clients.dll Syntax public class ConfigurationOptions Constructors ConfigurationOptions() This constructor creates a new instance of the ConfigurationOptions class. Declaration public ConfigurationOptions() Properties Application This property contains the application name to use for the connection. Declaration public string Application { get; set; } Property Value Type Description System.String ClientId This property contains the client identifier to use for the connection. Declaration public string ClientId { get; set; } Property Value Type Description System.String ClientSecret This property contains the client secret to use for the connection. Declaration public string ClientSecret { get; set; } Property Value Type Description System.String Environment This property contains an optional environment name to use for the connection. Declaration public string Environment { get; set; } Property Value Type Description System.String Logger This property contains a logger for the connection. Declaration public ILogger? Logger { get; set; } Property Value Type Description System.Nullable < ILogger > ReloadOnChange This property indicates whether the provider should watch for changes in the data and automatically reload whenever anything changes. Declaration public bool ReloadOnChange { get; set; } Property Value Type Description System.Boolean Timeout This property contains the timeout value to use for the connection. Declaration public TimeSpan? Timeout { get; set; } Property Value Type Description System.Nullable < TimeSpan > Url This property contains the endpointL for the ORANGE configuration microservice. Declaration public string Url { get; set; } Property Value Type Description System.String"
+  },
+  "api/CG.Orange.Clients.Options.html": {
+    "href": "api/CG.Orange.Clients.Options.html",
+    "title": "Namespace CG.Orange.Clients.Options",
+    "keywords": "Namespace CG.Orange.Clients.Options Classes ConfigurationOptions This class represent options for reading from the ORANGE configuration microservice."
+  },
+  "api/CG.Orange.Clients.Sources.html": {
+    "href": "api/CG.Orange.Clients.Sources.html",
+    "title": "Namespace CG.Orange.Clients.Sources",
+    "keywords": "Namespace CG.Orange.Clients.Sources Interfaces IOrangeConfigurationSource This interface represent a data source that reads from the ORANGE configuration microservice."
+  },
+  "api/CG.Orange.Clients.Sources.IOrangeConfigurationSource.html": {
+    "href": "api/CG.Orange.Clients.Sources.IOrangeConfigurationSource.html",
+    "title": "Interface IOrangeConfigurationSource",
+    "keywords": "Interface IOrangeConfigurationSource This interface represent a data source that reads from the ORANGE configuration microservice. Namespace : CG.Orange.Clients.Sources Assembly : CG.Orange.Clients.dll Syntax public interface IOrangeConfigurationSource Properties Options This property contains the options for the source. Declaration ConfigurationOptions Options { get; } Property Value Type Description ConfigurationOptions"
+  },
+  "api/index.html": {
+    "href": "api/index.html",
+    "title": "PLACEHOLDER",
+    "keywords": "PLACEHOLDER TODO: Add .NET projects to the src folder and run docfx to generate REAL API Documentation !"
+  },
+  "api/Microsoft.Extensions.Configuration.ConfigurationBuilderExtensions.html": {
+    "href": "api/Microsoft.Extensions.Configuration.ConfigurationBuilderExtensions.html",
+    "title": "Class ConfigurationBuilderExtensions",
+    "keywords": "Class ConfigurationBuilderExtensions This class contains extension methods related to the Microsoft.Extensions.Configuration.IConfigurationBuilder type. Inheritance System.Object ConfigurationBuilderExtensions Inherited Members System.Object.Equals(System.Object) System.Object.Equals(System.Object, System.Object) System.Object.GetHashCode() System.Object.GetType() System.Object.MemberwiseClone() System.Object.ReferenceEquals(System.Object, System.Object) System.Object.ToString() Namespace : Microsoft.Extensions.Configuration Assembly : CG.Orange.Clients.dll Syntax public static class ConfigurationBuilderExtensions Methods AddOrangeConfiguration(IConfigurationBuilder, Action<ConfigurationOptions>, Nullable<ILogger>) This method adds a configuration source that reads from the ORANGE configuration microservice. Declaration public static IConfigurationBuilder AddOrangeConfiguration(this IConfigurationBuilder builder, Action<ConfigurationOptions> optionsDelegate, ILogger? bootstrapLogger = null) Parameters Type Name Description Microsoft.Extensions.Configuration.IConfigurationBuilder builder The builder to use for the operation. Action < ConfigurationOptions > optionsDelegate The options delegate to use for the operation. System.Nullable < ILogger > bootstrapLogger The optional bootstrap logger to use for the operation. Returns Type Description Microsoft.Extensions.Configuration.IConfigurationBuilder The value of the builder parameter. Examples This example demonstrates integrating with the ORANGE configuration microservice using hard coded options: var builder = WebApplication.CreateBuilder(args); builder.AddOrangeConfiguration(options => { options.Application = \"yourappname\"; options.ClientId = \"yourclientid\"; options.ClientSecret = \"yoursecret\"; }); var app = builder.Build(); app.Run(); This example demonstrates integrating with the ORANGE configuration microservice using options from the local configuration: var builder = WebApplication.CreateBuilder(args); builder.AddOrangeConfiguration(options => builder.Configuration.GetSection(\"yoursection\").Bind(options) ); var app = builder.Build(); app.Run();"
+  },
+  "api/Microsoft.Extensions.Configuration.html": {
+    "href": "api/Microsoft.Extensions.Configuration.html",
+    "title": "Namespace Microsoft.Extensions.Configuration",
+    "keywords": "Namespace Microsoft.Extensions.Configuration Classes ConfigurationBuilderExtensions This class contains extension methods related to the Microsoft.Extensions.Configuration.IConfigurationBuilder type."
+  },
+  "articles/intro.html": {
+    "href": "articles/intro.html",
+    "title": "Add your introductions here!",
+    "keywords": "Add your introductions here!"
+  },
+  "index.html": {
+    "href": "index.html",
+    "title": "Introduction",
+    "keywords": "Introduction CG.Orange.Clients.dll contains a configuration client for the CG.Orange configuration microservice."
+  }
+}
