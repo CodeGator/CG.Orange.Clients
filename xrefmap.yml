@@ -26,6 +26,12 @@ references:
   isSpec: "True"
   fullName: CG.Orange.Clients.Options.ConfigurationOptions.ConfigurationOptions
   nameWithType: ConfigurationOptions.ConfigurationOptions
+- uid: CG.Orange.Clients.Options.ConfigurationOptions._url
+  name: _url
+  href: api/CG.Orange.Clients.Options.ConfigurationOptions.html#CG_Orange_Clients_Options_ConfigurationOptions__url
+  commentId: F:CG.Orange.Clients.Options.ConfigurationOptions._url
+  fullName: CG.Orange.Clients.Options.ConfigurationOptions._url
+  nameWithType: ConfigurationOptions._url
 - uid: CG.Orange.Clients.Options.ConfigurationOptions.Application
   name: Application
   href: api/CG.Orange.Clients.Options.ConfigurationOptions.html#CG_Orange_Clients_Options_ConfigurationOptions_Application
