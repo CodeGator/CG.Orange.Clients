@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Primitives;
 
 BootstrapLogger.LogLevelToDebug();
 
@@ -15,6 +16,7 @@ while(true)
             options.Environment = "development";
             options.Url = "https://localhost:7145";
             options.ClientId = "cg.orange.samples.quickstart";
+            options.ReloadOnChange = true;
         },
         BootstrapLogger.Instance()
         ));
@@ -35,16 +37,23 @@ while(true)
         {
             Console.WriteLine("no configuration found! check the settings / make sure the server is running.");
         }
-    });
 
-    Console.WriteLine();
-    Console.WriteLine("press Q to stop, or any other to continue");
-    
-    var key = Console.ReadKey();
-    if (key.Key == ConsoleKey.Q)
-    {
-        Console.WriteLine("done.");
-        return;
-    }
-    Console.WriteLine();
+        ChangeToken.OnChange(
+            () => cfg.GetReloadToken(),
+            () => 
+            {
+                Console.WriteLine("change detected from the microservice!");
+            });
+
+        Console.WriteLine();
+        Console.WriteLine("press Q to stop, or any other to continue");
+
+        var key = Console.ReadKey();
+        if (key.Key == ConsoleKey.Q)
+        {
+            Console.WriteLine("done.");
+            return;
+        }
+        Console.WriteLine();
+    });    
 }

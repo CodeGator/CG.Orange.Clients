@@ -8,6 +8,19 @@ namespace CG.Orange.Clients.Options;
 public class ConfigurationOptions 
 {
     // *******************************************************************
+    // Fields.
+    // *******************************************************************
+
+    #region Fields
+
+    /// <summary>
+    /// This field backs the <see cref="ConfigurationOptions.Url"/> property.
+    /// </summary>
+    internal protected string _url = null!;
+
+    #endregion
+
+    // *******************************************************************
     // Properties.
     // *******************************************************************
 
@@ -19,7 +32,21 @@ public class ConfigurationOptions
     /// </summary>
     [Required]
     [Url]
-    public string Url { get; set; } = null!;
+    public string Url 
+    {
+        get { return _url; }
+        set
+        {
+            if (!value.Trim().EndsWith("/"))
+            {
+                _url = $"{value.Trim()}/";
+            }
+            else
+            {
+                _url = value.Trim();
+            }
+        } 
+    }
 
     /// <summary>
     /// This property contains the application name to use for the connection.
@@ -79,7 +106,7 @@ public class ConfigurationOptions
     public ConfigurationOptions()
     {
         // Create any defaults.
-        Url = "https://localhost:7004/";
+        Url = "https://localhost:7145/";
     }
 
     #endregion
