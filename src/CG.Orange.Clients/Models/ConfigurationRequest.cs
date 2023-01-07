@@ -2,10 +2,10 @@
 namespace CG.Orange.Clients.Models
 {
     /// <summary>
-    /// This class represents a request for settings to the ORANGE configuration
-    /// microservice from the <see cref="OrangeConfigurationProvider"/> provider.
+    /// This class represents a request for a configuration from the ORANGE 
+    /// microservice.
     /// </summary>
-    internal class SettingsRequest
+    internal class ConfigurationRequest
     {
         // *******************************************************************
         // Properties.
@@ -24,6 +24,12 @@ namespace CG.Orange.Clients.Models
         /// </summary>
         [Required]
         public string? Environment { get; set; }
+
+        /// <summary>
+        /// This property contains the optional client identifier for the caller.
+        /// </summary>
+        [MaxLength(200)]
+        public string? ClientId { get; set; }
 
         #endregion
     }

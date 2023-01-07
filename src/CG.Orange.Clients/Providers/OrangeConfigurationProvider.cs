@@ -1,4 +1,7 @@
 ﻿
+using System.Net.Sockets;
+using System.Net;
+
 namespace CG.Orange.Clients.Providers
 {
     /// <summary>
@@ -100,7 +103,7 @@ namespace CG.Orange.Clients.Providers
                         );
 
                     // Fetch the settings.
-                    var data = FetchSettings(accessToken);
+                    var data = FetchConfiguration(accessToken);
 
                     // Did we return anything?
                     if (data is not null)
@@ -440,11 +443,11 @@ namespace CG.Orange.Clients.Providers
         // *******************************************************************
 
         /// <summary>
-        /// This method fetches settings from the remote configuration microservice.
+        /// This method fetches a configuration from the Orange microservice.
         /// </summary>
         /// <param name="accessToken">The access token to use for the operation.</param>
-        /// <returns>The setting from the remove microservice.</returns>
-        private Dictionary<string, string?> FetchSettings(
+        /// <returns>The configuration from the Orange microservice.</returns>
+        private Dictionary<string, string?> FetchConfiguration(
             string accessToken
             )
         {
@@ -465,7 +468,7 @@ namespace CG.Orange.Clients.Providers
                 {
                     // Log what happened.
                     Source.Options.Logger?.LogWarning(
-                        "No access token found! Unable to fetch remote settings!"
+                        "No access token found! Unable to fetch remote configuration!"
                         );
 
                     // No data.
@@ -518,8 +521,8 @@ namespace CG.Orange.Clients.Providers
                     "Bearer", accessToken
                     );
 
-                // Use the settings endpoint.
-                var url = $"api/settings";
+                // Use the right endpoint.
+                var url = $"api/configuration";
 
                 // Log what we are about to do.
                 Source.Options.Logger?.LogDebug(
@@ -529,10 +532,11 @@ namespace CG.Orange.Clients.Providers
 
                 // Create json for the body.
                 var jsonContent = JsonContent.Create(
-                    new SettingsRequest()
+                    new ConfigurationRequest()
                     {
                         Application = Source.Options.Application,
-                        Environment = Source.Options.Environment
+                        Environment = Source.Options.Environment,
+                        ClientId = Source.Options.ClientId
                     },
                     options: new JsonSerializerOptions()
                     {
@@ -628,7 +632,7 @@ namespace CG.Orange.Clients.Providers
 
                 // Log how long it took
                 Source.Options.Logger?.LogDebug(
-                    "Fetch setting timing: {time}",
+                    "Fetch configuration timing: {time}",
                     stopWatch.Elapsed
                     );
 #endif
